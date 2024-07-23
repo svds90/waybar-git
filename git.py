@@ -1,12 +1,16 @@
+from itertools import count
 import json
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pprint import pprint
 
-repo_path = "/home/svds90/Docs"
+repo_paths = "/home/svds90/Docs, /home/svds90/.config"
 
 
 def get_repo_list(repo_path: str) -> list:
+
+    for repo in repo_path.split(','):
+        print(repo)
 
     command = f'find {repo_path} -type d -name ".git" 2>/dev/null'
     result = subprocess.run(command, capture_output=True, shell=True, text=True)
@@ -23,10 +27,3 @@ def get_repo_list(repo_path: str) -> list:
 def get_git_status(repo_path: str):
     command = 'git status'
     result = subprocess.run(command, capture_output=True, shell=True, text=True, cwd=repo_path)
-
-    return result.stdout
-
-
-pprint(get_repo_list(repo_path))
-
-pprint(get_git_status("/home/svds90/Docs/repo/waybar-git"))
