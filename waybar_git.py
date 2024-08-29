@@ -3,7 +3,7 @@ import json
 import subprocess
 from pprint import pprint
 
-dirs = "/home/svds90/Docs, /home/svds90/.config"
+dirs = ""
 
 dirs_list = [path.strip() for path in dirs.split(',')]
 
